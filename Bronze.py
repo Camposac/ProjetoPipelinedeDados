@@ -1,9 +1,10 @@
+#importando as bibliotecas necessárias no projeto
 import json
 import requests
 from datetime import timedelta, date
 
 #ENDPOINT
-api_url = "https://api.carbonintensity.org.uk/intensity/date"
+api_url = 'https://api.carbonintensity.org.uk/intensity/date/'
 
 #Função que gera as datas
 def generate_range_date (start_date, end_date):
@@ -26,8 +27,35 @@ end_date = today + timedelta(days=1)
 dates = generate_range_date(start_date, end_date)
 #lista vazia para receber as datas
 dados = []
+
+# (E) EXTRACT
 #gerador de datas
 for date in dates:
     r = requests.get(f'{api_url}{date}')
-    print(r.status_code)
+    #Significados 200: Ok; 400: Bad Request; 500: Internal Server Error 
+    #print(r.status_code)
+    r = r.json()
+
+# (T) TRANSFORM
+
+    intensity = r['data'][0]['intensity']
+    forecast = intensity['forecast']
+    actual = intensity['actual']
+    index = intensity['index']
+
+    dados.append({
+        "Search_date":today.strftime("%Y-%m-%d"),
+        "prevision_date": date,
+        "index": index,
+        "actual": actual,
+        "forecast":forecast
+    })  
+
+    #print(dados)
+
+# (L) LOAD
+
+with open("bronze.json", "w") as arquivo:
+    json.dump(dados,arquivo,indent=4)
+
 
