@@ -1,0 +1,23 @@
+[
+    {
+        "Search_date": "2023-10-10",
+        "prevision_date": "2023-10-09",
+        "index": "low",
+        "actual": 117,
+        "forecast": 126
+    },
+    {
+        "Search_date": "2023-10-10",
+        "prevision_date": "2023-10-10",
+        "index": "moderate",
+        "actual": 161,
+        "forecast": 164
+    },
+    {
+        "Search_date": "2023-10-10",
+        "prevision_date": "2023-10-11",
+        "index": "low",
+        "actual": 55,
+        "forecast": 81
+    }
+]

@@ -5,6 +5,8 @@ from datetime import timedelta, date
 
 #ENDPOINT
 api_url = 'https://api.carbonintensity.org.uk/intensity/date/'
+bronze = "data_lake/bronze"
+
 
 #Função que gera as datas
 def generate_range_date (start_date, end_date):
@@ -55,7 +57,9 @@ for date in dates:
 
 # (L) LOAD
 
-with open("bronze.json", "w") as arquivo:
+file_name = f'/carbonintensity/{today.strftime("%Y-%m-%d")}.json'
+
+with open(bronze+file_name, "w") as arquivo:
     json.dump(dados,arquivo,indent=4)
 
 
